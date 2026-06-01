@@ -19,7 +19,7 @@
   .cart-btn{background:var(--accent);border:none;color:#fff;padding:9px 16px;border-radius:24px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:6px;transition:.2s;box-shadow:0 2px 10px rgba(255,107,53,.3)}
   .cart-btn:hover{background:#e55a28;transform:scale(1.04)}
   .cart-count{background:#fff;color:var(--accent);border-radius:50%;width:22px;height:22px;font-size:.82rem;font-weight:900;display:flex;align-items:center;justify-content:center}
-  .search-bar{flex:1;max-width:340px;display:flex;align-items:center;background:rgba(255,255,255,.15);border-radius:24px;padding:0 14px;gap:6px}
+  .search-bar{flex:1;max-width:340px;display:flex;align-items:center;background:rgba(255,255,.15);border-radius:24px;padding:0 14px;gap:6px}
   .search-bar input{background:none;border:none;outline:none;color:#fff;font-family:'Cairo',sans-serif;font-size:.93rem;width:100%;padding:9px 0}
   .search-bar input::placeholder{color:rgba(255,255,255,.6)}
   .hero{background:linear-gradient(120deg,#6c3fc5,#ff6b35);color:#fff;text-align:center;padding:36px 16px 32px}
@@ -171,7 +171,7 @@
   .footer-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:14px}
   .footer-links a{color:rgba(255,255,.75);text-decoration:none;font-size:.9rem}
   .footer-links a:hover{color:#fff}
-  .footer-copy{color:rgba(255,255,.5);font-size:.82rem}
+  .footer-copy{color:rgba(255,255,255,.5);font-size:.82rem}
   @media(max-width:600px){
     .hero h1{font-size:1.3rem}
     .products-grid{grid-template-columns:repeat(2,1fr);gap:10px}
@@ -344,5 +344,12 @@ const DELIVERY_FEES = {
   'ورقلة': 1000, 'باتنة': 700, 'افتراضي': 800
 };
 
+const DEFAULT_PRODUCTS = [
+  { id:1, name:"مصباح Yage T125 قابل للطي", cat:"إلكترونيات", price:1400, oldPrice:2000, rating:4.7, reviews:20, emoji:"💡", badge:"جديد", img:"" },
+  { id:2, name:"سماعات بلوتوث P47", cat:"إلكترونيات", price:2500, oldPrice:3500, rating:4.5, reviews:45, emoji:"🎧", badge:"الأكثر مبيعا", img:"" },
+  { id:3, name:"كريم مرطب للوجه", cat:"جمال", price:900, oldPrice:1200, rating:4.8, reviews:120, emoji:"✨", badge:"", img:"" }
+];
+
 let PRODUCTS = JSON.parse(localStorage.getItem('dz_products'));
-if (!PRODUCTS
+if (!PRODUCTS || !PRODUCTS.length) {
+  PRODUCTS = DEFAULT_PRODUCTS
