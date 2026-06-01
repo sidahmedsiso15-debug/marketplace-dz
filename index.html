@@ -8,7 +8,7 @@
 <style>
   :root {
     --primary:#6c3fc5;--primary-dark:#4e2d9a;--accent:#ff6b35;--accent2:#ffd700;
-    --bg:#f8f6ff;--card:#fff;--text:#1a1a2e;--muted:#888;--border:#e8e2f7;
+    --bg:#f8f6ff;--card:#fff;--text:#1a2e;--muted:#888;--border:#e8e2f7;
     --success:#22c55e;--danger:#ef4444;--shadow:0 4px 24px rgba(108,63,197,.10);--admin:#1e293b;
   }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -21,7 +21,7 @@
   .cart-count{background:#fff;color:var(--accent);border-radius:50%;width:22px;height:22px;font-size:.82rem;font-weight:900;display:flex;align-items:center;justify-content:center}
   .search-bar{flex:1;max-width:340px;display:flex;align-items:center;background:rgba(255,255,.15);border-radius:24px;padding:0 14px;gap:6px}
   .search-bar input{background:none;border:none;outline:none;color:#fff;font-family:'Cairo',sans-serif;font-size:.93rem;width:100%;padding:9px 0}
-  .search-bar input::placeholder{color:rgba(255,255,255,.6)}
+  .search-bar input::placeholder{color:rgba(255,255,.6)}
   .hero{background:linear-gradient(120deg,#6c3fc5,#ff6b35);color:#fff;text-align:center;padding:36px 16px 32px}
   .hero h1{font-size:1.7rem;font-weight:900;margin-bottom:6px}
   .hero p{opacity:.85;font-size:1rem}
@@ -169,7 +169,7 @@
   footer{background:var(--primary-dark);color:#fff;text-align:center;padding:28px 16px;margin-top:32px}
   .footer-logo{font-size:1.3rem;font-weight:900;margin-bottom:10px}
   .footer-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:14px}
-  .footer-links a{color:rgba(255,255,.75);text-decoration:none;font-size:.9rem}
+  .footer-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.9rem}
   .footer-links a:hover{color:#fff}
   .footer-copy{color:rgba(255,255,255,.5);font-size:.82rem}
   @media(max-width:600px){
@@ -352,4 +352,17 @@ const DEFAULT_PRODUCTS = [
 
 let PRODUCTS = JSON.parse(localStorage.getItem('dz_products'));
 if (!PRODUCTS || !PRODUCTS.length) {
-  PRODUCTS = DEFAULT_PRODUCTS
+  PRODUCTS = DEFAULT_PRODUCTS;
+  saveProducts();
+}
+
+function saveProducts() {
+  localStorage.setItem('dz_products', JSON.stringify(PRODUCTS));
+}
+
+let cart = [];
+let currentCat = 'الكل';
+let currentDeliveryFee = 0;
+
+function formatPrice(num) {
+  return num.toLocaleString('ar-DZ') + ' دج';
