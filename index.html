@@ -215,3 +215,160 @@
     </div>
     <select class="sort-select" onchange="sortProducts(this.value)">
       <option value="default">ترتيب افتراضي</option>
+      <option value="price-asc">السعر: من الأقل</option>
+      <option value="price-desc">السعر: من الأعلى</option>
+      <option value="discount">أكبر خصم</option>
+    </select>
+  </div>
+</div>
+
+<div class="products-section">
+  <div class="products-grid" id="productsGrid"></div>
+</div>
+
+<button class="admin-fab" onclick="openAdminLogin()" title="لوحة الإدارة">⚙️</button>
+
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h2>🛒 سلة التسوق</h2>
+    <button class="close-cart" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty"><span>🛒</span>سلتك فارغة</div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span>المجموع الكلي</span>
+      <span class="cart-total-amount" id="cartTotal">0 دج</span>
+    </div>
+    <button class="btn-continue" onclick="closeCart()">🛍 متابعة التسوق</button>
+    <button class="btn-checkout" id="checkoutBtn" onclick="openOrderModal()" disabled>✅ إتمام الطلب</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="orderModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>📦 تفاصيل الطلب</h3>
+      <button class="close-modal" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="order-summary">
+        <div class="order-summary-title">🛒 ملخص طلبك</div>
+        <div id="orderItemsList"></div>
+        <div class="order-total-row"><span>المجموع</span><span id="orderTotalAmount" style="color:var(--primary)">0 دج</span></div>
+      </div>
+      <div class="form-group"><label>👤 الاسم الكامل *</label><input type="text" id="custName" placeholder="أدخل اسمك"></div>
+      <div class="form-group"><label>📞 رقم الهاتف *</label><input type="tel" id="custPhone" placeholder="07XXXXXXXX"></div>
+      <div class="form-group">
+        <label>🏙️ الولاية *</label>
+        <select id="custCity" class="admin-input" onchange="updateDelivery()" style="margin-bottom:0">
+          <option value="">اختر الولاية</option>
+          <option value="الجزائر">الجزائر - 500 دج</option>
+          <option value="وهران">وهران - 700 دج</option>
+          <option value="قسنطينة">قسنطينة - 700 دج</option>
+          <option value="عنابة">عنابة - 800 دج</option>
+          <option value="سطيف">سطيف - 600 دج</option>
+          <option value="البليدة">البليدة - 500 دج</option>
+          <option value="تيزي وزو">تيزي وزو - 600 دج</option>
+          <option value="بجاية">بجاية - 700 دج</option>
+          <option value="تلمسان">تلمسان - 800 دج</option>
+          <option value="بسكرة">بسكرة - 900 دج</option>
+          <option value="ورقلة">ورقلة - 1000 دج</option>
+          <option value="باتنة">باتنة - 700 دج</option>
+        </select>
+      </div>
+      <div class="form-group"><label>📍 العنوان</label><input type="text" id="custAddress" placeholder="الحي، الشارع..."></div>
+      <div class="form-group"><label>💬 ملاحظات</label><textarea id="custNotes" placeholder="أي ملاحظات..."></textarea></div>
+      <button class="btn-whatsapp" onclick="sendWhatsApp()">💬 تأكيد الطلب عبر واتساب</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="successModal">
+  <div class="modal">
+    <div class="success-modal">
+      <span>🎉</span>
+      <h2>تم إرسال طلبك!</h2>
+      <p>شكراً! سيتواصل معك فريق Marketplace DZ قريباً 💚</p>
+      <button class="btn-primary" onclick="resetAll()">متابعة التسوق 🛍</button>
+    </div>
+  </div>
+</div>
+
+<div class="admin-login-overlay" id="adminLoginOverlay">
+  <div class="admin-login-box">
+    <div class="lock">🔐</div>
+    <h2>لوحة الإدارة</h2>
+    <p>أدخل كلمة السر للدخول</p>
+    <div class="login-err" id="loginErr">❌ كلمة السر خاطئة</div>
+    <input type="password" id="adminPassInput" placeholder="••••••" onkeydown="if(event.key==='Enter')checkAdminPass()">
+    <button class="btn-login" onclick="checkAdminPass()">🔓 دخول</button>
+    <button class="btn-cancel" onclick="closeAdminLogin()">إلغاء</button>
+  </div>
+</div>
+
+<div class="admin-overlay" id="adminOverlay" onclick="closeAdmin()"></div>
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-panel-header">
+    <h2>⚙️ لوحة الإدارة</h2>
+    <button class="admin-logout-btn" onclick="logoutAdmin()">🚪 خروج</button>
+  </div>
+  <div class="admin-tabs">
+    <button class="admin-tab active" onclick="switchTab('stats')">📊 إحصائيات</button>
+    <button class="admin-tab" onclick="switchTab('add')">➕ إضافة</button>
+    <button class="admin-tab" onclick="switchTab('manage')">📦 المنتجات</button>
+  </div>
+  <div class="admin-body" id="adminBody"></div>
+</div>
+
+<div class="toast" id="toast">✅ <span id="toastMsg"></span></div>
+
+<footer>
+  <div class="footer-logo">🛍 Marketplace DZ</div>
+  <p style="opacity:.7;margin-bottom:14px">أفضل المنتجات بأفضل الأسعار</p>
+  <div class="footer-links">
+    <a href="tel:0783785888">📞 0783 785 888</a>
+    <a href="https://wa.me/213783785888">💬 واتساب</a>
+    <a href="https://www.facebook.com/marketpace.dz">📘 فايسبوك</a>
+  </div>
+  <div class="footer-copy">© 2024 Marketplace DZ</div>
+</footer>
+
+<script>
+const ADMIN_PASSWORD='199506';
+const DELIVERY_FEES = {
+  'الجزائر': 500, 'وهران': 700, 'قسنطينة': 700, 'عنابة': 800, 'سطيف': 600,
+  'البليدة': 500, 'تيزي وزو': 600, 'بجاية': 700, 'تلمسان': 800, 'بسكرة': 900,
+  'ورقلة': 1000, 'باتنة': 700, 'افتراضي': 800
+};
+
+const DEFAULT_PRODUCTS = [
+  { id:1, name:"مصباح Yage T125 قابل للطي", cat:"إلكترونيات", price:1400, oldPrice:2000, rating:4.7, reviews:20, emoji:"💡", badge:"جديد", img:"" },
+  { id:2, name:"سماعات بلوتوث P47", cat:"إلكترونيات", price:2500, oldPrice:3500, rating:4.5, reviews:45, emoji:"🎧", badge:"الأكثر مبيعا", img:"" },
+  { id:3, name:"كريم مرطب للوجه", cat:"جمال", price:900, oldPrice:1200, rating:4.8, reviews:120, emoji:"✨", badge:"", img:"" }
+];
+
+let PRODUCTS = JSON.parse(localStorage.getItem('dz_products'));
+if (!PRODUCTS || !PRODUCTS.length) {
+  PRODUCTS = DEFAULT_PRODUCTS;
+  saveProducts();
+}
+
+function saveProducts() {
+  localStorage.setItem('dz_products', JSON.stringify(PRODUCTS));
+}
+
+let cart = [];
+let currentCat = 'الكل';
+let currentDeliveryFee = 0;
+
+function formatPrice(num) {
+  return num.toLocaleString('ar-DZ') + ' دج';
+}
+
+function renderProducts(list = PRODUCTS) {
+  const grid = document.getElementById('productsGrid');
+  if (!list.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted
