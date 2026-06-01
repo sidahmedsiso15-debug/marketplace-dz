@@ -274,7 +274,7 @@ let msg='🛍️ *طلب جديد من Marketplace DZ*%0A%0A';
 CART.forEach(i=>{msg+=`▪️ ${i.name}%0A الكمية: ${i.qty} × ${formatPrice(i.price)}%0A`});
 let total=CART.reduce((s,i)=>s+i.price*i.qty,0);
 msg+=`%0A💰 *الإجمالي: ${formatPrice(total)}*%0A%0Aالاسم: %0Aالعنوان: %0Aالهاتف: `;
-window.open(`https://wa.me/213XXXXXXXXX?text=${msg}`,'_blank');
+window.open(`https://wa.me/213783785888?text=${msg}`,'_blank');
 }
 function showToast(msg){let t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),3000)}
 
