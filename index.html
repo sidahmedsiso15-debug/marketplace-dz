@@ -558,6 +558,108 @@ function toggleEdit(id){document.getElementById(`editForm${id}`).classList.toggl
 function previewEditImg(e,id){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{const img=document.getElementById(`editImgPreview${id}`);img.src=ev.target.result;img.style.display='block'};reader.readAsDataURL(file)}
 function saveEdit(id){const p=PRODUCTS.find(x=>x.id===id);p.name=document.getElementById(`editName${id}`).value.trim();p.cat=document.getElementById(`editCat${id}`).value.trim();p.price=parseInt(document.getElementById(`editPrice${id}`).value);p.oldPrice=parseInt(document.getElementById(`editOldPrice${id}`).value)||null;p.emoji=document.getElementById(`editEmoji${id}`).value.trim()||'📦';p.badge=document.getElementById(`editBadge${id}`).value.trim();const img=document.getElementById(`editImgPreview${id}`);if(img.src)p.img=img.src;saveProducts();renderProducts();showToast('تم حفظ التعديلات');switchTab('manage')}
 function deleteProduct(id){if(!confirm('هل أنت متأكد من حذف هذا المنتج؟'))return;PRODUCTS=PRODUCTS.filter(p=>p.id!==id);saveProducts();renderProducts();showToast('تم حذف المنتج');switchTab('manage')}
+<button class="btn-edit" onclick="toggleEdit(${p.id})">✏️ تعديل</button>
+<button class="btn-delete" onclick="deleteProduct(${p.id})">🗑️ حذف</button>
+</div>
+</div>
+<div class="edit-form" id="editForm${p.id}">
+<div class="edit-row">
+<input type="text" id="editName${p.id}" class="admin-input" value="${p.name}" placeholder="الاسم">
+<input type="text" id="editCat${p.id}" class="admin-input" value="${p.cat}" placeholder="التصنيف">
+</div>
+<div class="edit-row">
+<input type="number" id="editPrice${p.id}" class="admin-input" value="${p.price}" placeholder="السعر">
+<input type="number" id="editOldPrice${p.id}" class="admin-input" value="${p.oldPrice||''}" placeholder="السعر القديم">
+</div>
+<div class="edit-row">
+<input type="text" id="editEmoji${p.id}" class="admin-input" value="${p.emoji}" placeholder="إيموجي" maxlength="2">
+<input type="text" id="editBadge${p.id}" class="admin-input" value="${p.badge||''}" placeholder="شارة">
+</div>
+<input type="file" accept="image/*" onchange="previewEditImg(event,${p.id})" style="margin-bottom:7px">
+<img id="editImgPreview${p.id}" class="edit-img-preview" ${p.img?`src="${p.img}" style="display:block"`:''}>
+<div style="display:flex;gap:7px">
+<button class="btn-save-edit" onclick="saveEdit(${p.id})">💾 حفظ</button>
+<button class="btn-cancel-edit" onclick="toggleEdit(${p.id})">إلغاء</button>
+</div>
+</div>`).join('')}
+function searchAdminProducts(q){const list=PRODUCTS.filter(p=>p.name.toLowerCase().includes(q.toLowerCase())||p.cat.toLowerCase().includes(q.toLowerCase()));document.getElementById('adminProductsList').innerHTML=renderAdminProducts(list)}
+function toggleEdit(id){document.getElementById(`editForm${id}`).classList.toggle('open')}
+function previewEditImg(e,id){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{const img=document.getElementById(`editImgPreview${id}`);img.src=ev.target.result;img.style.display='block'};reader.readAsDataURL(file)}
+function saveEdit(id){const p=PRODUCTS.find(x=>x.id===id);p.name=document.getElementById(`editName${id}`).value.trim();p.cat=document.getElementById(`editCat${id}`).value.trim();p.price=parseInt(document.getElementById(`editPrice${id}`).value);p.oldPrice=parseInt(document.getElementById(`editOldPrice${id}`).value)||null;p.emoji=document.getElementById(`editEmoji${id}`).value.trim()||'📦';p.badge=document.getElementById(`editBadge${id}`).value.trim();const img=document.getElementById(`editImgPreview${id}`);if(img.src)p.img=img.src;saveProducts();renderProducts();showToast('تم حفظ التعديلات');switchTab('manage')}
+function deleteProduct(id){if(!confirm('هل أنت متأكد من حذف هذا المنتج؟'))return;PRODUCTS=PRODUCTS.filter(p=>p.id!==id);saveProducts();renderProducts();showToast('تم حذف المنتج');switchTab('manage')}
+<div class="admin-product-item" id="adminItem${p.id}">
+<div class="admin-product-thumb">${p.img?`<img src="${p.img}">`:p.emoji}</div>
+<div class="admin-product-info">
+<div class="admin-product-name">${p.name}</div>
+<div class="admin-product-meta">${p.cat} • ${formatPrice(p.price)} ${p.badge?`• ${p.badge}`:''}</div>
+</div>
+<div class="admin-product-actions">
+<button class="btn-edit" onclick="toggleEdit(${p.id})">✏️ تعديل</button>
+<button class="btn-delete" onclick="deleteProduct(${p.id})">🗑️ حذف</button>
+</div>
+</div>
+<div class="edit-form" id="editForm${p.id}">
+<div class="edit-row">
+<input type="text" id="editName${p.id}" class="admin-input" value="${p.name}" placeholder="الاسم">
+<input type="text" id="editCat${p.id}" class="admin-input" value="${p.cat}" placeholder="التصنيف">
+</div>
+<div class="edit-row">
+<input type="number" id="editPrice${p.id}" class="admin-input" value="${p.price}" placeholder="السعر">
+<input type="number" id="editOldPrice${p.id}" class="admin-input" value="${p.oldPrice||''}" placeholder="السعر القديم">
+</div>
+<div class="edit-row">
+<input type="text" id="editEmoji${p.id}" class="admin-input" value="${p.emoji}" placeholder="إيموجي" maxlength="2">
+<input type="text" id="editBadge${p.id}" class="admin-input" value="${p.badge||''}" placeholder="شارة">
+</div>
+<input type="file" accept="image/*" onchange="previewEditImg(event,${p.id})" style="margin-bottom:7px">
+<img id="editImgPreview${p.id}" class="edit-img-preview" ${p.img?`src="${p.img}" style="display:block"`:''}>
+<div style="display:flex;gap:7px">
+<button class="btn-save-edit" onclick="saveEdit(${p.id})">💾 حفظ</button>
+<button class="btn-cancel-edit" onclick="toggleEdit(${p.id})">إلغاء</button>
+</div>
+</div>`).join('')}
+function searchAdminProducts(q){const list=PRODUCTS.filter(p=>p.name.toLowerCase().includes(q.toLowerCase())||p.cat.toLowerCase().includes(q.toLowerCase()));document.getElementById('adminProductsList').innerHTML=renderAdminProducts(list)}
+function toggleEdit(id){document.getElementById(`editForm${id}`).classList.toggle('open')}
+function previewEditImg(e,id){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{const img=document.getElementById(`editImgPreview${id}`);img.src=ev.target.result;img.style.display='block'};reader.readAsDataURL(file)}
+function saveEdit(id){const p=PRODUCTS.find(x=>x.id===id);p.name=document.getElementById(`editName${id}`).value.trim();p.cat=document.getElementById(`editCat${id}`).value.trim();p.price=parseInt(document.getElementById(`editPrice${id}`).value);p.oldPrice=parseInt(document.getElementById(`editOldPrice${id}`).value)||null;p.emoji=document.getElementById(`editEmoji${id}`).value.trim()||'📦';p.badge=document.getElementById(`editBadge${id}`).value.trim();const img=document.getElementById(`editImgPreview${id}`);if(img.src)p.img=img.src;saveProducts();renderProducts();showToast('تم حفظ التعديلات');switchTab('manage')}
+function deleteProduct(id){if(!confirm('هل أنت متأكد من حذف هذا المنتج؟'))return;PRODUCTS=PRODUCTS.filter(p=>p.id!==id);saveProducts();renderProducts();showToast('تم حذف المنتج');switchTab('manage')}
+function renderAdminProducts(list=PRODUCTS){return list.map(p=>`
+<div class="admin-product-item" id="adminItem${p.id}">
+<div class="admin-product-thumb">${p.img?`<img src="${p.img}">`:p.emoji}</div>
+<div class="admin-product-info">
+<div class="admin-product-name">${p.name}</div>
+<div class="admin-product-meta">${p.cat} • ${formatPrice(p.price)} ${p.badge?`• ${p.badge}`:''}</div>
+</div>
+<div class="admin-product-actions">
+<button class="btn-edit" onclick="toggleEdit(${p.id})">✏️ تعديل</button>
+<button class="btn-delete" onclick="deleteProduct(${p.id})">🗑️ حذف</button>
+</div>
+</div>
+<div class="edit-form" id="editForm${p.id}">
+<div class="edit-row">
+<input type="text" id="editName${p.id}" class="admin-input" value="${p.name}" placeholder="الاسم">
+<input type="text" id="editCat${p.id}" class="admin-input" value="${p.cat}" placeholder="التصنيف">
+</div>
+<div class="edit-row">
+<input type="number" id="editPrice${p.id}" class="admin-input" value="${p.price}" placeholder="السعر">
+<input type="number" id="editOldPrice${p.id}" class="admin-input" value="${p.oldPrice||''}" placeholder="السعر القديم">
+</div>
+<div class="edit-row">
+<input type="text" id="editEmoji${p.id}" class="admin-input" value="${p.emoji}" placeholder="إيموجي" maxlength="2">
+<input type="text" id="editBadge${p.id}" class="admin-input" value="${p.badge||''}" placeholder="شارة">
+</div>
+<input type="file" accept="image/*" onchange="previewEditImg(event,${p.id})" style="margin-bottom:7px">
+<img id="editImgPreview${p.id}" class="edit-img-preview" ${p.img?`src="${p.img}" style="display:block"`:''}>
+<div style="display:flex;gap:7px">
+<button class="btn-save-edit" onclick="saveEdit(${p.id})">💾 حفظ</button>
+<button class="btn-cancel-edit" onclick="toggleEdit(${p.id})">إلغاء</button>
+</div>
+</div>`).join('')}
+function searchAdminProducts(q){const list=PRODUCTS.filter(p=>p.name.toLowerCase().includes(q.toLowerCase())||p.cat.toLowerCase().includes(q.toLowerCase()));document.getElementById('adminProductsList').innerHTML=renderAdminProducts(list)}
+function toggleEdit(id){document.getElementById(`editForm${id}`).classList.toggle('open')}
+function previewEditImg(e,id){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{const img=document.getElementById(`editImgPreview${id}`);img.src=ev.target.result;img.style.display='block'};reader.readAsDataURL(file)}
+function saveEdit(id){const p=PRODUCTS.find(x=>x.id===id);p.name=document.getElementById(`editName${id}`).value.trim();p.cat=document.getElementById(`editCat${id}`).value.trim();p.price=parseInt(document.getElementById(`editPrice${id}`).value);p.oldPrice=parseInt(document.getElementById(`editOldPrice${id}`).value)||null;p.emoji=document.getElementById(`editEmoji${id}`).value.trim()||'📦';p.badge=document.getElementById(`editBadge${id}`).value.trim();const img=document.getElementById(`editImgPreview${id}`);if(img.src)p.img=img.src;saveProducts();renderProducts();showToast('تم حفظ التعديلات');switchTab('manage')}
+function deleteProduct(id){if(!confirm('هل أنت متأكد من حذف هذا المنتج؟'))return;PRODUCTS=PRODUCTS.filter(p=>p.id!==id);saveProducts();renderProducts();showToast('تم حذف المنتج');switchTab('manage')}
 renderProducts();
 </script>
 </body>
