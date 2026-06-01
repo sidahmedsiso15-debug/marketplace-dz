@@ -653,8 +653,8 @@ function renderAdminProducts(list=PRODUCTS){return list.map(p=>`
 <div style="display:flex;gap:7px">
 <button class="btn-save-edit" onclick="saveEdit(${p.id})">💾 حفظ</button>
 <button class="btn-cancel-edit" onclick="toggleEdit(${p.id})">إلغاء</button>
-</div>
-</div>`).join('')}
+    </div>
+    </div>`).join('')}
 function searchAdminProducts(q){const list=PRODUCTS.filter(p=>p.name.toLowerCase().includes(q.toLowerCase())||p.cat.toLowerCase().includes(q.toLowerCase()));document.getElementById('adminProductsList').innerHTML=renderAdminProducts(list)}
 function toggleEdit(id){document.getElementById(`editForm${id}`).classList.toggle('open')}
 function previewEditImg(e,id){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{const img=document.getElementById(`editImgPreview${id}`);img.src=ev.target.result;img.style.display='block'};reader.readAsDataURL(file)}
