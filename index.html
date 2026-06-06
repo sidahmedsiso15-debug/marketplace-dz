@@ -1,105 +1,234 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>متجر جديد - Marketplace DZ</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Tahoma, Arial, sans-serif; background: #f5f5f5; color: #333; }
-
-    /* الهيدر */
-    .header { background: linear-gradient(135deg,#667eea,#764ba2); color: #fff; padding: 1rem; }
-    .header-content { max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
-    nav ul { list-style: none; display: flex; gap: 20px; }
-    nav a { color: #fff; text-decoration: none; font-weight: bold; }
-
-    /* قسم الترحيب */
-    .hero { text-align: center; padding: 60px 20px; background: linear-gradient(to right,#3498db,#2ecc71); color: white; }
-    .hero h1 { font-size: 2.5rem; margin-bottom: 15px; }
-    .hero p { font-size: 1.2rem; margin-bottom: 20px; }
-    .btn { background: #e74c3c; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
-
-    /* المنتجات */
-    .products { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-    .products h2 { text-align: center; margin-bottom: 30px; color: #764ba2; }
-    .product-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 20px; }
-    .product-card { background: #fff; border-radius: 10px; padding: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center; }
-    .product-card img { max-width: 100%; border-radius: 8px; }
-    .price { display: block; margin: 10px 0; font-weight: bold; color: #e74c3c; }
-
-    /* آراء العملاء */
-    .testimonials { background: #fff; padding: 40px 20px; margin: 40px auto; max-width: 800px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    .testimonials h2 { text-align: center; margin-bottom: 20px; color: #3498db; }
-    .testimonial { margin-bottom: 15px; text-align: center; }
-    .testimonial p { font-style: italic; }
-    .testimonial span { display: block; margin-top: 5px; color: #764ba2; }
-
-    /* الفوتر */
-    .contact { background: #764ba2; color: white; text-align: center; padding: 40px 20px; margin-top: 40px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV - Ahmed Abdiche - Technicien en Génie Mécanique</title>
+<style>
+  /* ATS-Friendly: No columns, no tables, no images, standard fonts, black on white */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #000000;
+    background-color: #ffffff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  
+  /* Print optimization */
+  @media print {
+    body {
+      padding: 0.5in;
+      max-width: 100%;
+    }
+    .no-print {
+      display: none !important;
+    }
+    a {
+      text-decoration: none;
+      color: #000000;
+    }
+    .page-break {
+      page-break-before: always;
+    }
+  }
+  
+  /* Header Section */
+  .header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #000000;
+  }
+  
+  .header h1 {
+    font-size: 18pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  
+  .header .title {
+    font-size: 12pt;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  
+  /* Contact Info */
+  .contact {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .contact p {
+    margin: 4px 0;
+  }
+  
+  /* Section Styling */
+  .section {
+    margin-bottom: 20px;
+  }
+  
+  .section h2 {
+    font-size: 13pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #000000;
+  }
+  
+  .section h3 {
+    font-size: 11pt;
+    font-weight: bold;
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+  
+  .section p {
+    margin-bottom: 8px;
+  }
+  
+  /* Lists */
+  ul {
+    margin-left: 20px;
+    margin-bottom: 10px;
+  }
+  
+  li {
+    margin-bottom: 4px;
+  }
+  
+  /* Experience dates */
+  .date {
+    font-weight: normal;
+  }
+  
+  /* Download button */
+  .no-print {
+    text-align: center;
+    margin: 30px 0;
+  }
+  
+  .btn-download {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 11pt;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .btn-download:hover {
+    background-color: #333333;
+  }
+  
+  /* Spacing helpers */
+  .job-title {
+    font-weight: bold;
+  }
+  
+  .company {
+    font-style: italic;
+  }
+  
+  .skill-line {
+    margin-bottom: 6px;
+  }
+</style>
 </head>
 <body>
-  <!-- الهيدر -->
-  <header class="header">
-    <div class="header-content">
-      <div class="logo">🛒 متجر جديد</div>
-      <nav>
-        <ul>
-          <li><a href="#">الرئيسية</a></li>
-          <li><a href="#">المنتجات</a></li>
-          <li><a href="#">تواصل معنا</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
 
-  <!-- قسم الترحيب -->
-  <section class="hero">
-    <h1>مرحبا بك في متجرنا</h1>
-    <p>أفضل المنتجات بأفضل الأسعار</p>
-    <button class="btn">تسوق الآن</button>
-  </section>
+<div class="no-print">
+  <button class="btn-download" onclick="window.print()">Télécharger / Imprimer en PDF</button>
+</div>
 
-  <!-- قسم المنتجات -->
-  <section class="products">
-    <h2>منتجاتنا</h2>
-    <div class="product-grid">
-      <div class="product-card">
-        <img src="https://via.placeholder.com/200" alt="منتج 1">
-        <h3>منتج 1</h3>
-        <p>وصف قصير للمنتج</p>
-        <span class="price">1500 دج</span>
-        <button class="btn">أضف للسلة</button>
-      </div>
-      <div class="product-card">
-        <img src="https://via.placeholder.com/200" alt="منتج 2">
-        <h3>منتج 2</h3>
-        <p>وصف قصير للمنتج</p>
-        <span class="price">2500 دج</span>
-        <button class="btn">أضف للسلة</button>
-      </div>
-    </div>
-  </section>
+<header class="header">
+  <h1>AHMED ABDICHE</h1>
+  <p class="title">TECHNICIEN EN GÉNIE MÉCANIQUE - SPÉCIALISTE LUBRIFIANTS & PIÈCES AUTO</p>
+</header>
 
-  <!-- قسم آراء العملاء -->
-  <section class="testimonials">
-    <h2>آراء عملائنا</h2>
-    <div class="testimonial">
-      <p>"خدمة ممتازة وسرعة في التوصيل!"</p>
-      <span>- أحمد</span>
-    </div>
-    <div class="testimonial">
-      <p>"منتجات بجودة عالية وأسعار مناسبة."</p>
-      <span>- فاطمة</span>
-    </div>
-  </section>
+<section class="section contact">
+  <h2>Contact</h2>
+  <p>Email: sidahmed079548@gmail.com</p>
+  <p>Téléphone: 0783785888</p>
+  <p>Adresse: Sidi Daoud, Boumerdès, Algérie</p>
+</section>
 
-  <!-- قسم تواصل معنا -->
-  <footer class="contact">
-    <h2>تواصل معنا</h2>
-    <p>📧 marketplace.dz@gmail.com</p>
-    <p>📞 0550 00 00 00</p>
-  </footer>
+<section class="section">
+  <h2>Profil</h2>
+  <p>Technicien en génie mécanique spécialisé en énergétique, sérieux et rigoureux dans mon travail. Doté d'un excellent relationnel et d'une grande capacité d'apprentissage rapide, je maîtrise le domaine des lubrifiants et des pièces automobiles. Je suis prêt à m'investir pleinement pour contribuer au développement de votre entreprise.</p>
+</section>
+
+<section class="section">
+  <h2>Formation</h2>
+  <h3>Licence en Génie Mécanique, Spécialité Énergétique</h3>
+  <p>Université M'hamed Bougara de Boumerdès <span class="date">- 2020</span></p>
+  
+  <h3>Baccalauréat Mathématiques</h3>
+  <p>Lycée 19 Mai 1956 - Dellys <span class="date">- 2015</span></p>
+</section>
+
+<section class="section">
+  <h2>Expériences</h2>
+  <h3><span class="job-title">Technicien / Vendeur Pièces Auto & Lubrifiants</span></h3>
+  <p><span class="company">Secteur automobile - Boumerdès</span> <span class="date">| 2020 - Aujourd'hui</span></p>
+  <ul>
+    <li>Conseil technique aux clients sur le choix des lubrifiants et pièces détachées adaptés</li>
+    <li>Gestion des stocks et suivi des commandes de pièces automobiles</li>
+    <li>Diagnostic de base et orientation client vers les solutions mécaniques adéquates</li>
+    <li>Développement du portefeuille client et fidélisation</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>Compétences</h2>
+  <ul>
+    <li>Diagnostic mécanique de base</li>
+    <li>Conseil en lubrification automobile</li>
+    <li>Gestion de stock et approvisionnement</li>
+    <li>Relation client et techniques de vente</li>
+    <li>Rigueur et sens du détail</li>
+    <li>Apprentissage rapide</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>Langues</h2>
+  <p class="skill-line">Arabe: Langue maternelle</p>
+  <p class="skill-line">Français: Courant</p>
+  <p class="skill-line">Anglais: Niveau intermédiaire</p>
+</section>
+
+<section class="section">
+  <h2>Logiciels</h2>
+  <ul>
+    <li>Pack Office: Word, Excel</li>
+    <li>Logiciels de gestion de stock</li>
+    <li>Outils de diagnostic auto</li>
+  </ul>
+</section>
+
+<script>
+  // Ensure ATS compatibility - no dynamic content injection
+  document.addEventListener('DOMContentLoaded', function() {
+    // No external JS dependencies for ATS compliance
+  });
+</script>
+
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
 </body>
 </html>
